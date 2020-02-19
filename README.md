@@ -1,8 +1,10 @@
 # java-cart
 
-
-
-Sample Project used in Java Test Driven Development Courses
+Shopping cart demo
+- Java 8
+- TDD (Test Driven Development)
+- OOD
+- Maven
 
 To run tests:
 
