@@ -12,12 +12,15 @@
 - Java jdk 8 
 - Maven
 - Java and Maven runnable environment
+- Preferrably using IntelliJ :)
+- IDE to import project as mvn project
 
 ## To run tests:
 
     mvn clean test
 
 ## To run coverage (using jacoco)
+    report is in java-cart-master\target\site\jacoco
 
     mvn clean package
     
