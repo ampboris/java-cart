@@ -9,13 +9,13 @@ import static org.junit.Assert.*;
 
 public class SimpleCartPaymentCalculatorTest {
 
-    private CartPaymentCalculator calculator = new SimpleCartPaymentCalculator(10);
+    private float taxRatePct = 10.5f;
+    private CartPaymentCalculator calculator = new SimpleCartPaymentCalculator(taxRatePct);
 
-//    @Test
-//    public void givenAusCalculator_whenConstruct_thenCorrectTypeReturn() {
-//
-//        assertEquals("AUS", calculator.getCalculatorType());
-//    }
+    @Test
+    public void givenCalculator_whenGetRate_thenValidRateReturn() {
+        assertTrue(taxRatePct == calculator.getTaxRatePercent());
+    }
 
     @Test
     public void givenEmptyItems_whenGetTotal_thenValidAmountReturn() {
@@ -32,17 +32,17 @@ public class SimpleCartPaymentCalculatorTest {
         List<ProductItem> items = new ArrayList<>();
 
         Product testProduct = new Product("test-1", "test product 1", 3);
-        // 3 * 1.1 = 3.3 => 3
+        // 3 * 1.105 = 3.315 => 3
         items.add(new ProductItem(testProduct, 1));
         assertEquals(3, calculator.getPaymentAmount(items));
 
-        // 5 * 1.1 = 5.5 => 6
+        // 5 * 1.105 = 5.525 => 6
         testProduct = new Product("test-1", "test product 1", 5);
         items.clear();
         items.add(new ProductItem(testProduct, 1));
         assertEquals(6, calculator.getPaymentAmount(items));
 
-        // 6 * 1.1 = 6.6 => 7
+        // 6 * 1.105 = 6.63 => 7
         testProduct = new Product("test-1", "test product 1", 6);
         items.clear();
         items.add(new ProductItem(testProduct, 1));
@@ -64,7 +64,10 @@ public class SimpleCartPaymentCalculatorTest {
         // 7 * 3 = 21
         items.add(new ProductItem(testProduct3, 3));
 
-        //Total without tax = 33, with tax = 33 * 1.1 = 36.3 => 36
+
+        //Total without tax = 33, with tax = 33 * 1.105 = 36.465 => 36
+        assertEquals(3, calculator.getTaxAmount(items));
+        assertEquals(33, calculator.getPaymentAmountExcludeTax(items));
         assertEquals(36, calculator.getPaymentAmount(items));
     }
 }
