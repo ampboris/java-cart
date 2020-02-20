@@ -2,6 +2,10 @@
 
 ## version number: 04fa1404c2b3b7be0e5909d4ba93d1332bc76e98
 
+## TO reviewers
+
+1. junit test  - step1test, step2test and step3test are created due to distribution requirement. 
+
 ## Shopping cart demo
 - Java 8
 - TDD (Test Driven Development)
