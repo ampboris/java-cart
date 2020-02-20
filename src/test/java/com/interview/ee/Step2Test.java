@@ -27,7 +27,7 @@ public class Step2Test {
 
         ProductItem item = shoppingCart.getItemBySku(product.getSku());
         // The shopping cart should contain 8 Dove Soaps
-        assertEquals(orderQuantity + 3, item.getQuantity());
+        assertEquals(8, item.getQuantity());
         // each with a unit price of $39.99
         assertEquals(productPrice, item.getProduct().getPriceInCents());
         assertTrue(product.equals(item.getProduct()));

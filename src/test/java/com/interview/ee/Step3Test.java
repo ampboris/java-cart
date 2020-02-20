@@ -20,7 +20,7 @@ public class Step3Test {
         int axePriceInCents = 9999;
         Product productAxe = new Product(axeSku, axeName, axePriceInCents);
 
-        // An empty shopping cart using simple cart payment calculator with 12.5% tax rate
+        // An empty shopping cart with sales tax rate of 12.5%
         float taxRatePercent = 12.5f;
         Cart shoppingCart = new Cart(new SimpleCartPaymentCalculator(taxRatePercent));
 
@@ -33,20 +33,23 @@ public class Step3Test {
         int axeQuantity = 2;
         shoppingCart.addItem(productAxe, axeQuantity);
 
-
+        //shopping cart should contain 2 Dove Soaps each with a unit price of 39.99
         ProductItem doveItem = shoppingCart.getItemBySku(productDove.getSku());
         assertEquals(doveQuantity, doveItem.getQuantity());
         assertEquals(dovePriceInCents, doveItem.getProduct().getPriceInCents());
         assertTrue(productDove.equals(doveItem.getProduct()));
 
-
+        // shopping cart should contain 2 Axe Deos each with a unit price of 99.99
         ProductItem axeItem = shoppingCart.getItemBySku(productAxe.getSku());
         assertEquals(axeQuantity, axeItem.getQuantity());
         assertEquals(axePriceInCents, axeItem.getProduct().getPriceInCents());
         assertTrue(productAxe.equals(axeItem.getProduct()));
 
+        // the total sales tax amount for the shopping cart should equal 35.00
         assertEquals(3500, shoppingCart.getCheckoutTaxAmount());
-        assertEquals(31496, shoppingCart.getCheckoutAmount());
         assertEquals(27996, shoppingCart.getCheckoutAmountExcludeTax());
+        // the shopping cart’s total price should equal 314.96
+        assertEquals(31496, shoppingCart.getCheckoutAmount());
+
     }
 }
