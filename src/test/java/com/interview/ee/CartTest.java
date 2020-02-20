@@ -13,13 +13,29 @@ public class CartTest {
     private Product testProduct2 = new Product("test-2", "test product 2", 3);
     private Product testProduct3 = new Product("test-3", "test product 3", 11300);
 
+
+    @Test
+    public void givenNoCart_whenCreateCartWithNoCalculator_thenCartWithDefaultCalculatorReturn() {
+        Cart cartWithDefault = new Cart(null);
+        assertNotNull(cartWithDefault);
+        assertTrue(cartWithDefault.getPaymentAmount() == 0);
+    }
+
     @Test
     public void givenNewProductItem_whenAdd_thenCorrectItemReturn() {
         cart.emptyCart();
         assertEquals("cart is NOT empty",0, cart.getItems().size());
         cart.addItem(testProduct1, 3);
-        assertEquals("item count is 1 after add new item",1, cart.getItems().size());
-        assertEquals("item count is 1 after add new item",3, cart.getItemBySku(testProduct1.getSku()).getQuantity());
+        assertEquals(1, cart.getItems().size());
+        assertEquals(3, cart.getItemBySku(testProduct1.getSku()).getQuantity());
+    }
+
+    @Test
+    public void givenNullProduct_whenAdd_thenNothingChangeAndNoExceptionReturn() {
+        cart.emptyCart();
+        assertEquals("cart is NOT empty",0, cart.getItems().size());
+        cart.addItem(null, 3);
+        assertEquals(0, cart.getItems().size());
     }
 
     @Test
@@ -41,7 +57,7 @@ public class CartTest {
         cart.addItem(testProduct2, 2);
         cart.addItem(testProduct3, 3);
         assertEquals("cart has LESS or More than 3 item",3, cart.getItems().size());
-        cart.removeItem(testProduct2);
+        cart.removeItemBySku(testProduct2.getSku());
         assertEquals("cart has LESS or More than 2 item",2, cart.getItems().size());
     }
 
@@ -50,7 +66,7 @@ public class CartTest {
         cart.addItem(testProduct1, 1);
         cart.addItem(testProduct3, 3);
         assertEquals("cart has LESS or More than 2 item",2, cart.getItems().size());
-        cart.removeItem(testProduct2);
+        cart.removeItemBySku(testProduct2.getSku());
         assertEquals("cart has LESS or More than 2 item",2, cart.getItems().size());
     }
 

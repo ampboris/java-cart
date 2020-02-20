@@ -26,4 +26,15 @@ public class ProductTest {
 
         assertTrue(product1.equals(product2));
     }
+
+    @Test
+    public void givenTwoProductWithDifferentDetails_whenCompare_thenEqualFalseReturn() {
+        Product product1 = new Product(sku, name, price);
+
+        assertFalse(product1.equals(null));
+        assertFalse(product1.equals(new Integer(10)));
+        assertFalse(product1.equals(new Product(sku, name, price + 1)));
+        assertFalse(product1.equals(new Product(sku, name + "_1", price)));
+        assertFalse(product1.equals(new Product(sku + "_1", name, price)));
+    }
 }
