@@ -1,6 +1,9 @@
 package com.interview.ee;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product  implements Serializable {
+    // sku is unique to all products
     private String sku;
     private String name;
     // priceInCents:  unit is cent, no decimal!!!

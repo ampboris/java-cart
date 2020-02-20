@@ -1,18 +1,18 @@
 package com.interview.ee;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Cart {
     // key is product sku, maintain uniqueness of product and simplify lookup
-    private Map<String, ProductItem> items = new HashMap<>();
-    // default calculator
+    private Map<String, ProductItem> items = new Hashtable<>();
     private CartPaymentCalculator calculator;
 
     public Cart(CartPaymentCalculator calculator) {
-        this.calculator = calculator;
+        //always has a default calculator!!
+        this.calculator = calculator != null ? calculator : new SimpleCartPaymentCalculator(0);
     }
 
     // list all items in cart
@@ -20,32 +20,36 @@ public class Cart {
         return this.items.values().stream().collect(Collectors.toList());
     }
 
+    // place order here
     public void addItem(Product product, int quantity) {
-        ProductItem item = new ProductItem(product, quantity);
-        this.items.merge(product.getSku(), item , (oldItem, newItem) -> oldItem!=null ? new ProductItem(oldItem.getProduct(), oldItem.getQuantity() + newItem.getQuantity()) : item);
+        if(product != null) {
+            // if sku is not found, it push new order item in
+            // if sku is found, it do merge, basically accumulate order quantity.
+            this.items.merge(product.getSku(), (new ProductItem(product, quantity)) , (oldItem, newItem) -> new ProductItem(oldItem.getProduct(), oldItem.getQuantity() + newItem.getQuantity()));
+        }
     }
 
     // remove item from cart
-    public void removeItem(Product product) {
-        this.items.remove(product.getSku());
+    public void removeItemBySku(String sku) {
+        this.items.remove(sku);
     }
-
+    // empty cart
     public void emptyCart() {
         this.items.clear();
     }
-
+    // get product item by sku
     public ProductItem getItemBySku(String sku) {
         return this.items.get(sku);
     }
-
+    // return full payment amount include tax
     public int getPaymentAmount() {
         return this.calculator.getPaymentAmount(this.getItems());
     }
-
+    // return tax
     public int getTaxAmount() {
         return this.calculator.getTaxAmount(this.getItems());
     }
-
+    // return amount without tax
     public int getPaymentAmountExcludeTax() {
         return this.calculator.getPaymentAmountExcludeTax(this.getItems());
     }

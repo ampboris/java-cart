@@ -1,6 +1,8 @@
 package com.interview.ee;
 
-public class ProductItem {
+import java.io.Serializable;
+
+public class ProductItem implements Serializable {
     private Product product;
     private int quantity;
 
