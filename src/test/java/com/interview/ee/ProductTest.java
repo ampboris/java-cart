@@ -16,7 +16,7 @@ public class ProductTest {
         assertNotNull(product);
         assertEquals(sku, product.getSku());
         assertEquals(name, product.getName());
-        assertEquals(price, product.getPrice());
+        assertEquals(price, product.getPriceInCents());
     }
 
     @Test
@@ -24,18 +24,6 @@ public class ProductTest {
         Product product1 = new Product(sku, name, price);
         Product product2 = new Product(sku, name, price);
 
-        assertTrue(product1.equals(product1));
         assertTrue(product1.equals(product2));
-    }
-
-    @Test
-    public void givenTwoProductWithDifferentDetails_whenCompare_thenEqualFalseReturn() {
-        Product product1 = new Product(sku, name, price);
-
-        assertFalse(product1.equals(null));
-        assertFalse(product1.equals(new Integer(10)));
-        assertFalse(product1.equals(new Product(sku, name, price + 1)));
-        assertFalse(product1.equals(new Product(sku, name + "_1", price)));
-        assertFalse(product1.equals(new Product(sku + "_1", name, price)));
     }
 }
