@@ -1,21 +1,19 @@
 package com.interview.ee;
 
-import java.util.Objects;
-
 public class Product {
     private String sku;
     private String name;
-    // price unit is cent, no decimal!!!
-    private int price;
+    // priceInCents:  unit is cent, no decimal!!!
+    private int priceInCents;
 
-    public Product(String sku, String name, int price) {
+    public Product(String sku, String name, int priceInCents) {
         this.sku = sku;
         this.name = name;
-        this.price = price;
+        this.priceInCents = priceInCents;
     }
 
-    public int getPrice() {
-        return this.price;
+    public int getPriceInCents() {
+        return this.priceInCents;
     }
 
     public String getSku() {
@@ -28,16 +26,11 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return getPrice() == product.getPrice() &&
-                Objects.equals(getSku(), product.getSku()) &&
-                Objects.equals(getName(), product.getName());
+        return getPriceInCents() == product.getPriceInCents() &&
+                getSku().equals(product.getSku()) &&
+                getName().equals(product.getName());
     }
 }
