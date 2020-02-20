@@ -18,6 +18,6 @@ public class ProductItem {
     }
 
     public int getItemTotal() {
-        return this.product.getPrice() * this.quantity;
+        return this.product.getPriceInCents() * this.quantity;
     }
 }
