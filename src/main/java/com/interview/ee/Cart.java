@@ -1,6 +1,7 @@
 package com.interview.ee;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -8,20 +9,20 @@ public class Cart {
     // key is product sku, maintain uniqueness of product and simplify lookup
     private Map<String, ProductItem> items = new HashMap<>();
     // default calculator
-    private Calculator calculator;
+    private CartPaymentCalculator calculator;
 
-    public Cart(Calculator calculator) {
+    public Cart(CartPaymentCalculator calculator) {
         this.calculator = calculator;
     }
 
     // list all items in cart
-    public Map<String, ProductItem> getItems() {
-        return this.items;
+    public List<ProductItem> getItems() {
+        return this.items.values().stream().collect(Collectors.toList());
     }
 
     public void addItem(Product product, int quantity) {
         ProductItem item = new ProductItem(product, quantity);
-        this.items.merge(product.getSku(), item , (k, v) -> item );
+        this.items.merge(product.getSku(), item , (oldItem, newItem) -> oldItem!=null ? new ProductItem(oldItem.getProduct(), oldItem.getQuantity() + newItem.getQuantity()) : item);
     }
 
     // remove item from cart
@@ -33,7 +34,19 @@ public class Cart {
         this.items.clear();
     }
 
+    public ProductItem getItemBySku(String sku) {
+        return this.items.get(sku);
+    }
+
     public int getPaymentAmount() {
         return this.calculator.getPaymentAmount(this.items.values().stream().collect(Collectors.toList()));
+    }
+
+    public int getTaxAmount() {
+        return this.calculator.getTaxAmount(this.items.values().stream().collect(Collectors.toList()));
+    }
+
+    public int getPaymentAmountExcludeTax() {
+        return this.calculator.getPaymentAmountExcludeTax(this.items.values().stream().collect(Collectors.toList()));
     }
 }
