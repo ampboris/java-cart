@@ -2,26 +2,27 @@
 
 version number: 04fa1404c2b3b7be0e5909d4ba93d1332bc76e98
 
-Shopping cart demo
+## Shopping cart demo
 - Java 8
 - TDD (Test Driven Development)
 - OOD
 - Maven
 
-Prerequisite:
+## Prerequisite:
 - Java jdk 8 
 - Maven
 - Java and Maven runnable environment
 
-To run tests:
+## To run tests:
 
     mvn clean test
 
-To run coverage (using jacoco)
+## To run coverage (using jacoco)
 
     mvn clean package
     
-OOD
+## OOD
+
     Cart 
         -----------------------------------
         - has a list of product order items
@@ -64,7 +65,7 @@ OOD
         - get total amount include tax
         - get tax rate
         
-Assumption and consideration
+## Assumption and consideration
 1. Product price is using int and using cents as unit. This will simplify calculation and directly using Math.round to int. I assume shopping cart max amount would not over 2 power 32. If this assumption is invalid, price type need to reconsider.
 1.1 * I have force the input of price to int, it means $39.99 need to enter as 3999. I did not provide conversion function for this.
 1.2 * Also the output of amount value is in cents as well. it means $199 will return as 19900.
