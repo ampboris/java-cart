@@ -39,14 +39,14 @@ public class Cart {
     }
 
     public int getPaymentAmount() {
-        return this.calculator.getPaymentAmount(this.items.values().stream().collect(Collectors.toList()));
+        return this.calculator.getPaymentAmount(this.getItems());
     }
 
     public int getTaxAmount() {
-        return this.calculator.getTaxAmount(this.items.values().stream().collect(Collectors.toList()));
+        return this.calculator.getTaxAmount(this.getItems());
     }
 
     public int getPaymentAmountExcludeTax() {
-        return this.calculator.getPaymentAmountExcludeTax(this.items.values().stream().collect(Collectors.toList()));
+        return this.calculator.getPaymentAmountExcludeTax(this.getItems());
     }
 }
