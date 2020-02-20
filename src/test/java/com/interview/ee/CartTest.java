@@ -18,7 +18,7 @@ public class CartTest {
     public void givenNoCart_whenCreateCartWithNoCalculator_thenCartWithDefaultCalculatorReturn() {
         Cart cartWithDefault = new Cart(null);
         assertNotNull(cartWithDefault);
-        assertTrue(cartWithDefault.getPaymentAmount() == 0);
+        assertTrue(cartWithDefault.getCheckoutAmount() == 0);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CartTest {
     public void givenEmptyCart_whenGetPaymentAmount_thenZeroReturn() {
         cart.emptyCart();
         assertTrue("cart is NOT empty", cart.getItems().size() == 0);
-        int total = cart.getPaymentAmount();
+        int total = cart.getCheckoutAmount();
         assertTrue("empty cart has invalid payment total", total == 0);
     }
 
@@ -94,7 +94,7 @@ public class CartTest {
         cart.addItem(testProduct2, 2);
         cart.addItem(testProduct3, 3);
         assertEquals("cart has LESS or More than 3 item",3, cart.getItems().size());
-        int total = cart.getPaymentAmount();
+        int total = cart.getCheckoutAmount();
         // 39495.5 => 39496
         assertEquals("payment amount is not expected",39496, total);
     }

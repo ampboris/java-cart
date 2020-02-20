@@ -66,7 +66,7 @@ public class SimpleCartPaymentCalculatorTest {
 
 
         //Total without tax = 33, with tax = 33 * 1.105 = 36.465 => 36
-        assertEquals(3, calculator.getTaxAmount(items));
+        assertEquals(3, calculator.getPaymentTaxAmount(items));
         assertEquals(33, calculator.getPaymentAmountExcludeTax(items));
         assertEquals(36, calculator.getPaymentAmount(items));
     }

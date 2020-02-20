@@ -29,7 +29,7 @@ public class InterviewTest {
         assertEquals(productPrice, item.getProduct().getPriceInCents());
         assertTrue(product.equals(item.getProduct()));
         // the shopping cart’s total price should equal $199.95
-        assertEquals(19995, shoppingCart.getPaymentAmount());
+        assertEquals(19995, shoppingCart.getCheckoutAmount());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class InterviewTest {
         assertEquals(productPrice, item.getProduct().getPriceInCents());
         assertTrue(product.equals(item.getProduct()));
         // the shopping cart’s total price should equal $319.92
-        assertEquals(31992, shoppingCart.getPaymentAmount());
+        assertEquals(31992, shoppingCart.getCheckoutAmount());
     }
 
     @Test
@@ -100,8 +100,8 @@ public class InterviewTest {
         assertEquals(axePriceInCents, axeItem.getProduct().getPriceInCents());
         assertTrue(productAxe.equals(axeItem.getProduct()));
 
-        assertEquals(3500, shoppingCart.getTaxAmount());
-        assertEquals(31496, shoppingCart.getPaymentAmount());
-        assertEquals(27996, shoppingCart.getPaymentAmountExcludeTax());
+        assertEquals(3500, shoppingCart.getCheckoutTaxAmount());
+        assertEquals(31496, shoppingCart.getCheckoutAmount());
+        assertEquals(27996, shoppingCart.getCheckoutAmountExcludeTax());
     }
 }
