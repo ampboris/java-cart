@@ -29,6 +29,11 @@ public class Cart {
         }
     }
 
+    // get product item by sku
+    public ProductItem getItemBySku(String sku) {
+        return this.items.get(sku);
+    }
+
     // remove item from cart
     public void removeItemBySku(String sku) {
         this.items.remove(sku);
@@ -37,20 +42,17 @@ public class Cart {
     public void emptyCart() {
         this.items.clear();
     }
-    // get product item by sku
-    public ProductItem getItemBySku(String sku) {
-        return this.items.get(sku);
-    }
+
     // return full payment amount include tax
-    public int getPaymentAmount() {
+    public int getCheckoutAmount() {
         return this.calculator.getPaymentAmount(this.getItems());
     }
     // return tax
-    public int getTaxAmount() {
-        return this.calculator.getTaxAmount(this.getItems());
+    public int getCheckoutTaxAmount() {
+        return this.calculator.getPaymentTaxAmount(this.getItems());
     }
     // return amount without tax
-    public int getPaymentAmountExcludeTax() {
+    public int getCheckoutAmountExcludeTax() {
         return this.calculator.getPaymentAmountExcludeTax(this.getItems());
     }
 }

@@ -15,16 +15,14 @@ public class SimpleCartPaymentCalculator extends CartPaymentCalculator {
     }
 
     @Override
-    public int getTaxAmount(List<ProductItem> items) {
+    public int getPaymentTaxAmount(List<ProductItem> items) {
         float serviceTax = this.getPaymentAmountExcludeTax(items) * this.taxRatePercent / 100;
         return Math.round(serviceTax);
     }
 
     @Override
     public int getPaymentAmount(List<ProductItem> items) {
-//        float total = this.getPaymentAmountExcludeTax(items) * (100 + this.taxRatePercent) / 100;
-//        return Math.round(total);
-        return this.getPaymentAmountExcludeTax(items) + this.getTaxAmount(items);
+        return this.getPaymentAmountExcludeTax(items) + this.getPaymentTaxAmount(items);
     }
 
     @Override
