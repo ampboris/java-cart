@@ -20,9 +20,10 @@
     mvn clean test
 
 ## To run coverage (using jacoco)
-    report is in java-cart-master\target\site\jacoco
-
+    
     mvn clean package
+    
+    coverage report is in java-cart-master\target\site\jacoco
     
 ## OOD
 
