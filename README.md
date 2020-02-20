@@ -67,9 +67,13 @@ version number: 04fa1404c2b3b7be0e5909d4ba93d1332bc76e98
         
 ## Assumption and consideration
 1. Product price is using int and using cents as unit. This will simplify calculation and directly using Math.round to int. I assume shopping cart max amount would not over 2 power 32. If this assumption is invalid, price type need to reconsider.
+
 1.1 * I have force the input of price to int, it means $39.99 need to enter as 3999. I did not provide conversion function for this.
+
 1.2 * Also the output of amount value is in cents as well. it means $199 will return as 19900.
+
 1.3 if input and output need to be in unit of dollar, I would change price input/out to String and provide conversion utility from dollar to cents. internal calculation and rounding wont affected.
+
 2. Product price are excluded-tax and all products are applicable to service tax. 
 3. Abstract cart checkout payment calculator. Initially plan to implement an AUS GST calculator, but it need a bit more time, so downgrade to simple calculator assuming service tax is applicable to all products. tax amount = tax rate * total amount exclude tax.
 4. Hashtable for Product Items. Hashtable can not insert null key or null value which maintain integrity better. Also define sku as key, just for simplicity and faster implementation. Otherwise I could just use <Product, quantity> as order item.
